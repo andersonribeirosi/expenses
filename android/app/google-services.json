@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1057142436246",
+    "project_id": "loja-virtual-8e6ee",
+    "storage_bucket": "loja-virtual-8e6ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057142436246:android:50330425c81f3cbc532db7",
+        "android_client_info": {
+          "package_name": "br.com.farias.lojavirtual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057142436246-8n870f2epargutkl9oi0v233ll29c00c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOUaOFTnp5Np91-icJIdCIuKP1TK0HBSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057142436246-8n870f2epargutkl9oi0v233ll29c00c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
