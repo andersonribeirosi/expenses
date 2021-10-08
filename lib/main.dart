@@ -9,6 +9,18 @@ main() {
   runApp(MyExpenses());
 }
 
+// class HexColor extends Color {
+//   static int _getColorFromHex(String hexColor) {
+//     hexColor = hexColor.toUpperCase().replaceAll("#", "");
+//     if (hexColor.length == 6) {
+//       hexColor = "FF" + hexColor;
+//     }
+//     return int.parse(hexColor, radix: 16);
+//   }
+
+//   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+// }
+
 class MyExpenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,9 +29,10 @@ class MyExpenses extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
         fontFamily: 'Roboto',
+        cardColor: Colors.grey[300],
         textTheme: const TextTheme(
-          headline6: TextStyle(fontSize: 36.0, fontFamily: 'EphesisRegular'),
-        ),
+            // headline6: TextStyle(fontSize: 36.0, fontFamily: 'EphesisRegular'),
+            ),
       ),
     );
   }
@@ -31,15 +44,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _transactions = [
-    Transaction(
-        id: '1', title: 'Tênis Nike', value: 300.65, date: DateTime.now()),
-    Transaction(
-        id: '2', title: 'Despesa #01', value: 109.20, date: DateTime.now()),
-    Transaction(
-        id: '3', title: 'Despesa #02', value: 85.20, date: DateTime.now()),
-    Transaction(
-        id: '4', title: 'Despesa #03', value: 2.20, date: DateTime.now()),
+  final List<Transaction> _transactions = [
+    // Transaction(
+    //     id: '1', title: 'Tênis Nike', value: 300.65, date: DateTime.now()),
+    // Transaction(
+    //     id: '2', title: 'Despesa #01', value: 109.20, date: DateTime.now()),
+    // Transaction(
+    //     id: '3', title: 'Despesa #02', value: 85.20, date: DateTime.now()),
+    // Transaction(
+    //     id: '4', title: 'Despesa #03', value: 2.20, date: DateTime.now()),
   ];
 
   _addTransaction(String title, double value) {
@@ -81,7 +94,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.all(15),
+                padding: EdgeInsets.only(top: 5, bottom: 5),
                 child: Card(
                   child: Padding(
                     padding: const EdgeInsets.all(20),
@@ -95,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   elevation: 5,
-                  color: Colors.green[700],
+                  color: Colors.green[600],
                 ),
               ),
               TransactionList(_transactions),
