@@ -1,4 +1,4 @@
-# loja_virtual_pro
+# Exenses
 
 A new Flutter project.
 
