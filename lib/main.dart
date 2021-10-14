@@ -1,25 +1,12 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'aulas/Flexible_Expanded/flexible_expanded.dart';
 import 'components/transaction_form.dart';
-import 'components/transaction_list.dart';
 import 'models/transaction.dart';
 
 main() {
   runApp(MyExpenses());
 }
-
-// class HexColor extends Color {
-//   static int _getColorFromHex(String hexColor) {
-//     hexColor = hexColor.toUpperCase().replaceAll("#", "");
-//     if (hexColor.length == 6) {
-//       hexColor = "FF" + hexColor;
-//     }
-//     return int.parse(hexColor, radix: 16);
-//   }
-
-//   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
-// }
 
 class MyExpenses extends StatelessWidget {
   @override
@@ -29,10 +16,8 @@ class MyExpenses extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
         fontFamily: 'Roboto',
-        cardColor: Colors.grey[300],
-        textTheme: const TextTheme(
-            // headline6: TextStyle(fontSize: 36.0, fontFamily: 'EphesisRegular'),
-            ),
+        // cardColor: Colors.grey[300],
+        textTheme: const TextTheme(),
       ),
     );
   }
@@ -45,15 +30,42 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [
-    // Transaction(
-    //     id: '1', title: 'Tênis Nike', value: 300.65, date: DateTime.now()),
-    // Transaction(
-    //     id: '2', title: 'Despesa #01', value: 109.20, date: DateTime.now()),
-    // Transaction(
-    //     id: '3', title: 'Despesa #02', value: 85.20, date: DateTime.now()),
-    // Transaction(
-    //     id: '4', title: 'Despesa #03', value: 2.20, date: DateTime.now()),
+    Transaction(
+        id: '1',
+        title: 'Tênis Nike',
+        value: 300.65,
+        date: DateTime.now().subtract(Duration(days: 33))),
+    Transaction(
+        id: '2',
+        title: 'Despesa #01',
+        value: 109.20,
+        date: DateTime.now().subtract(Duration(days: 5))),
+    Transaction(
+        id: '3',
+        title: 'Despesa #02',
+        value: 185.20,
+        date: DateTime.now().subtract(Duration(days: 4))),
+    Transaction(
+        id: '4',
+        title: 'Despesa #03',
+        value: 2.20,
+        date: DateTime.now().subtract(Duration(days: 3))),
+    Transaction(
+        id: '5',
+        title: 'Despesa #04',
+        value: 300.20,
+        date: DateTime.now().subtract(Duration(days: 2))),
+    Transaction(
+        id: '6', title: 'Despesa #05', value: 10.20, date: DateTime.now()),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
 
   _addTransaction(String title, double value) {
     final newTransaction = Transaction(
@@ -90,28 +102,12 @@ class _HomePageState extends State<HomePage> {
         ),
         body: SingleChildScrollView(
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(top: 5, bottom: 5),
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Text(
-                      'Gráfico',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white),
-                    ),
-                  ),
-                  elevation: 5,
-                  color: Colors.green[600],
-                ),
-              ),
-              TransactionList(_transactions),
+              // SizedBox(height: 20,),
+              FlexibleExpanded()
+              // Chart(_recentTransactions),
+              // TransactionList(_transactions),
             ],
           ),
         ),
