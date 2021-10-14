@@ -1,5 +1,7 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
+
 import 'aulas/Flexible_Expanded/flexible_expanded.dart';
 import 'components/transaction_form.dart';
 import 'models/transaction.dart';
@@ -104,7 +106,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              // SizedBox(height: 20,),
+              // SizedBox(height: 20),
               FlexibleExpanded()
               // Chart(_recentTransactions),
               // TransactionList(_transactions),
