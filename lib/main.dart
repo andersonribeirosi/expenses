@@ -1,10 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:loja_virtual_pro/components/chart.dart';
-
+import 'aulas/Flexible_Expanded/flexible_expanded.dart';
 import 'components/transaction_form.dart';
-import 'components/transaction_list.dart';
 import 'models/transaction.dart';
 
 main() {
@@ -59,10 +56,7 @@ class _HomePageState extends State<HomePage> {
         value: 300.20,
         date: DateTime.now().subtract(Duration(days: 2))),
     Transaction(
-        id: '6',
-        title: 'Despesa #05',
-        value: 10.20,
-        date: DateTime.now()),
+        id: '6', title: 'Despesa #05', value: 10.20, date: DateTime.now()),
   ];
 
   List<Transaction> get _recentTransactions {
@@ -110,8 +104,10 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Chart(_recentTransactions),
-              TransactionList(_transactions),
+              // SizedBox(height: 20,),
+              FlexibleExpanded()
+              // Chart(_recentTransactions),
+              // TransactionList(_transactions),
             ],
           ),
         ),
