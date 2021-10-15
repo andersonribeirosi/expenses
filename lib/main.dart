@@ -87,6 +87,12 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
+  _removeTransaction(String id){
+     setState(() {
+       _transactions.removeWhere((tr) => tr.id == id);
+     });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +112,7 @@ class _HomePageState extends State<HomePage> {
               // FlexibleExpanded()
               Chart(_recentTransactions),
               SizedBox(height: 5),
-              TransactionList(_transactions),
+              TransactionList(_transactions, _removeTransaction),
             ],
           ),
         ),
