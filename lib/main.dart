@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_expenses/components/chart.dart';
 import 'package:flutter_expenses/components/transaction_list.dart';
 
@@ -14,6 +15,10 @@ main() {
 class MyExpenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+        // DeviceOrientation.landscapeRight,
+        DeviceOrientation.portraitUp,
+      ]);
     return MaterialApp(
       home: HomePage(),
       theme: ThemeData(
@@ -33,26 +38,46 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [
-    // Transaction(
-    //     id: '1',
-    //     title: 'Despesa #01',
-    //     value: 310.76,
-    //     date: DateTime.now().subtract(Duration(days: 3))),
-    // Transaction(
-    //     id: '2',
-    //     title: 'Despesa #02',
-    //     value: 211.30,
-    //     date: DateTime.now().subtract(Duration(days: 4))),
-    // Transaction(
-    //     id: '3',
-    //     title: 'Despesa #03',
-    //     value: 211.30,
-    //     date: DateTime.now()),
-    // Transaction(
-    //     id: '4',
-    //     title: 'Despesa #04',
-    //     value: 11.30,
-    //     date: DateTime.now()),
+    Transaction(
+        id: '1',
+        title: 'Despesa #01',
+        value: 310.76,
+        date: DateTime.now().subtract(Duration(days: 3))),
+    Transaction(
+        id: '2',
+        title: 'Despesa #02',
+        value: 211.30,
+        date: DateTime.now().subtract(Duration(days: 4))),
+    Transaction(
+        id: '3',
+        title: 'Despesa #03',
+        value: 211.30,
+        date: DateTime.now()),
+    Transaction(
+        id: '4',
+        title: 'Despesa #04',
+        value: 11.30,
+        date: DateTime.now()),
+    Transaction(
+        id: '5',
+        title: 'Despesa #01',
+        value: 310.76,
+        date: DateTime.now().subtract(Duration(days: 3))),
+    Transaction(
+        id: '6',
+        title: 'Despesa #02',
+        value: 211.30,
+        date: DateTime.now().subtract(Duration(days: 4))),
+    Transaction(
+        id: '7',
+        title: 'Despesa #03',
+        value: 211.30,
+        date: DateTime.now()),
+    Transaction(
+        id: '8',
+        title: 'Despesa #04',
+        value: 11.30,
+        date: DateTime.now()),
   ];
 
   List<Transaction> get _recentTransactions {
