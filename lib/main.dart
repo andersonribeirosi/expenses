@@ -17,7 +17,7 @@ class MyExpenses extends StatelessWidget {
     return MaterialApp(
       home: HomePage(),
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
         fontFamily: 'Roboto',
         // cardColor: Colors.grey[300],
         textTheme: const TextTheme(),
@@ -33,26 +33,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [
-    Transaction(
-        id: '1',
-        title: 'Despesa #01',
-        value: 310.76,
-        date: DateTime.now().subtract(Duration(days: 3))),
-    Transaction(
-        id: '2',
-        title: 'Despesa #02',
-        value: 211.30,
-        date: DateTime.now().subtract(Duration(days: 4))),
-    Transaction(
-        id: '3',
-        title: 'Despesa #03',
-        value: 100211.30,
-        date: DateTime.now()),
-    Transaction(
-        id: '4',
-        title: 'Despesa #04',
-        value: 11.30,
-        date: DateTime.now()),
+    // Transaction(
+    //     id: '1',
+    //     title: 'Despesa #01',
+    //     value: 310.76,
+    //     date: DateTime.now().subtract(Duration(days: 3))),
+    // Transaction(
+    //     id: '2',
+    //     title: 'Despesa #02',
+    //     value: 211.30,
+    //     date: DateTime.now().subtract(Duration(days: 4))),
+    // Transaction(
+    //     id: '3',
+    //     title: 'Despesa #03',
+    //     value: 211.30,
+    //     date: DateTime.now()),
+    // Transaction(
+    //     id: '4',
+    //     title: 'Despesa #04',
+    //     value: 11.30,
+    //     date: DateTime.now()),
   ];
 
   List<Transaction> get _recentTransactions {
@@ -63,12 +63,14 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
-        id: Random().nextDouble().toString(),
-        title: title,
-        value: value,
-        date: DateTime.now());
+      id: Random().nextDouble().toString(),
+      title: title,
+      value: value,
+      // date: DateTime.now());
+      date: date,
+    );
 
     setState(() {
       _transactions.add(newTransaction);

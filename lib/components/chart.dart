@@ -23,15 +23,13 @@ class Chart extends StatelessWidget {
         if (someDay && someMonth && someYear) {
           totalSum += recentTransactions[i].value;
         }
-        // print(DateFormat.E().format(weekDay)[0]);
-        // print(totalSum);
       }
 
       return {
         'day': day,
         'value': totalSum.toStringAsFixed(2),
       };
-    });
+    }).reversed.toList();
   }
 
   double get _weekTotalValue {
@@ -56,7 +54,9 @@ class Chart extends StatelessWidget {
               child: ChartBar(
                 label: tr['day'].toString(),
                 value: double.parse(tr['value'].toString()),
-                percentage: double.parse(tr['value'].toString()) / _weekTotalValue,
+                percentage: _weekTotalValue == 0
+                    ? 0
+                    : double.parse(tr['value'].toString()) / _weekTotalValue,
               ),
             );
           }).toList(),

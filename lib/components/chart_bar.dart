@@ -13,7 +13,12 @@ class ChartBar extends StatelessWidget {
     return Column(
       children: [
         // Text('R\$${value.toStringAsFixed(2)}'),
-        FittedBox(child: Text(value.toStringAsFixed(2))),
+        Container(
+          height: 20,
+          child: FittedBox(
+            child: Text(value.toStringAsFixed(2)),
+          ),
+        ),
         SizedBox(
           height: 5,
         ),
@@ -48,7 +53,10 @@ class ChartBar extends StatelessWidget {
         ),
         Text(
           label,
-          style: TextStyle(color: Colors.grey[800], fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.grey[800],
+              fontSize: 16,
+              fontWeight: FontWeight.bold),
         )
       ],
     );
