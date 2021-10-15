@@ -16,9 +16,9 @@ class MyExpenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
-        // DeviceOrientation.landscapeRight,
-        DeviceOrientation.portraitUp,
-      ]);
+      // DeviceOrientation.landscapeRight,
+      DeviceOrientation.portraitUp,
+    ]);
     return MaterialApp(
       home: HomePage(),
       theme: ThemeData(
@@ -49,15 +49,9 @@ class _HomePageState extends State<HomePage> {
         value: 211.30,
         date: DateTime.now().subtract(Duration(days: 4))),
     Transaction(
-        id: '3',
-        title: 'Despesa #03',
-        value: 211.30,
-        date: DateTime.now()),
+        id: '3', title: 'Despesa #03', value: 211.30, date: DateTime.now()),
     Transaction(
-        id: '4',
-        title: 'Despesa #04',
-        value: 11.30,
-        date: DateTime.now()),
+        id: '4', title: 'Despesa #04', value: 11.30, date: DateTime.now()),
     Transaction(
         id: '5',
         title: 'Despesa #01',
@@ -69,15 +63,9 @@ class _HomePageState extends State<HomePage> {
         value: 211.30,
         date: DateTime.now().subtract(Duration(days: 4))),
     Transaction(
-        id: '7',
-        title: 'Despesa #03',
-        value: 211.30,
-        date: DateTime.now()),
+        id: '7', title: 'Despesa #03', value: 211.30, date: DateTime.now()),
     Transaction(
-        id: '8',
-        title: 'Despesa #04',
-        value: 11.30,
-        date: DateTime.now()),
+        id: '8', title: 'Despesa #04', value: 11.30, date: DateTime.now()),
   ];
 
   List<Transaction> get _recentTransactions {
@@ -112,32 +100,43 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
-  _removeTransaction(String id){
-     setState(() {
-       _transactions.removeWhere((tr) => tr.id == id);
-     });
+  _removeTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((tr) => tr.id == id);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    final appBar = AppBar(
+      title: Text('Despesas pessoais'),
+      actions: [
+        IconButton(
+            onPressed: () => _openModalTransaction(context),
+            icon: Icon(Icons.add))
+      ],
+    );
+
+    final availableHeight = MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top;
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Despesas pessoais'),
-          actions: [
-            IconButton(
-                onPressed: () => _openModalTransaction(context),
-                icon: Icon(Icons.add))
-          ],
-        ),
+        appBar: appBar,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               // SizedBox(height: 20),
               // FlexibleExpanded()
-              Chart(_recentTransactions),
-              SizedBox(height: 5),
-              TransactionList(_transactions, _removeTransaction),
+              Container(
+                height: availableHeight * 0.3,
+                child: Chart(_recentTransactions),
+              ),
+              // SizedBox(height: 5),
+              Container(
+                height: availableHeight * 0.7,
+                child: TransactionList(_transactions, _removeTransaction),
+              ),
             ],
           ),
         ),
