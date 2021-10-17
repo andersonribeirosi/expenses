@@ -55,12 +55,14 @@ class ChartBar extends StatelessWidget {
             ),
             Container(
               height: constraints.maxHeight * 0.15,
-              child: Text(
-                label,
-                style: TextStyle(
-                    color: Colors.grey[800],
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+              child: FittedBox(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                      color: Colors.grey[800],
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             )
           ],

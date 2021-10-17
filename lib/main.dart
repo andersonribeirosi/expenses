@@ -15,10 +15,10 @@ main() {
 class MyExpenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      // DeviceOrientation.landscapeRight,
-      DeviceOrientation.portraitUp,
-    ]);
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.landscapeRight,
+    //   DeviceOrientation.portraitUp,
+    // ]);
     return MaterialApp(
       home: HomePage(),
       theme: ThemeData(
@@ -38,35 +38,36 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [
-    Transaction(
-        id: '1',
-        title: 'Despesa #01',
-        value: 310.76,
-        date: DateTime.now().subtract(Duration(days: 3))),
-    Transaction(
-        id: '2',
-        title: 'Despesa #02',
-        value: 211.30,
-        date: DateTime.now().subtract(Duration(days: 4))),
-    Transaction(
-        id: '3', title: 'Despesa #03', value: 211.30, date: DateTime.now()),
-    Transaction(
-        id: '4', title: 'Despesa #04', value: 11.30, date: DateTime.now()),
-    Transaction(
-        id: '5',
-        title: 'Despesa #01',
-        value: 310.76,
-        date: DateTime.now().subtract(Duration(days: 3))),
-    Transaction(
-        id: '6',
-        title: 'Despesa #02',
-        value: 211.30,
-        date: DateTime.now().subtract(Duration(days: 4))),
-    Transaction(
-        id: '7', title: 'Despesa #03', value: 211.30, date: DateTime.now()),
-    Transaction(
-        id: '8', title: 'Despesa #04', value: 11.30, date: DateTime.now()),
+    // Transaction(
+    //     id: '1',
+    //     title: 'Despesa #01',
+    //     value: 310.76,
+    //     date: DateTime.now().subtract(Duration(days: 3))),
+    // Transaction(
+    //     id: '2',
+    //     title: 'Despesa #02',
+    //     value: 211.30,
+    //     date: DateTime.now().subtract(Duration(days: 4))),
+    // Transaction(
+    //     id: '3', title: 'Despesa #03', value: 211.30, date: DateTime.now()),
+    // Transaction(
+    //     id: '4', title: 'Despesa #04', value: 11.30, date: DateTime.now()),
+    // Transaction(
+    //     id: '5',
+    //     title: 'Despesa #01',
+    //     value: 310.76,
+    //     date: DateTime.now().subtract(Duration(days: 3))),
+    // Transaction(
+    //     id: '6',
+    //     title: 'Despesa #02',
+    //     value: 211.30,
+    //     date: DateTime.now().subtract(Duration(days: 4))),
+    // Transaction(
+    //     id: '7', title: 'Despesa #03', value: 211.30, date: DateTime.now()),
+    // Transaction(
+    //     id: '8', title: 'Despesa #04', value: 11.30, date: DateTime.now()),
   ];
+  bool _showChart = false;
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
@@ -108,17 +109,27 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     final appBar = AppBar(
       title: Text('Despesas pessoais'),
       actions: [
+        if(isLandscape) IconButton(
+          onPressed: () {setState(() {
+            _showChart = !_showChart;
+          });},
+          icon: Icon(_showChart ? Icons.list : Icons.show_chart),
+        ),
         IconButton(
             onPressed: () => _openModalTransaction(context),
             icon: Icon(Icons.add))
       ],
     );
 
-    final availableHeight = MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top;
+    final availableHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
 
     return Scaffold(
         appBar: appBar,
@@ -128,15 +139,33 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               // SizedBox(height: 20),
               // FlexibleExpanded()
-              Container(
-                height: availableHeight * 0.3,
-                child: Chart(_recentTransactions),
-              ),
-              // SizedBox(height: 5),
-              Container(
-                height: availableHeight * 0.7,
-                child: TransactionList(_transactions, _removeTransaction),
-              ),
+              // if (isLandscape)
+              //   Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       Text('Exibir Gráfico'),
+              //       Switch(
+              //         value: _showChart,
+              //         onChanged: (value) {
+              //           setState(() {
+              //             _showChart = value;
+              //           });
+              //         },
+              //       ),
+              //     ],
+              //   ),
+SizedBox(height: 5,),
+              if (_showChart || !isLandscape)
+                Container(
+                  height: availableHeight * (isLandscape ? 0.65 : 0.3),
+                  child: Chart(_recentTransactions),
+                ),
+
+              if (!_showChart || !isLandscape)
+                Container(
+                  height: availableHeight * 0.7,
+                  child: TransactionList(_transactions, _removeTransaction),
+                ),
             ],
           ),
         ),
