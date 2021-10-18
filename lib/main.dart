@@ -96,6 +96,7 @@ class _HomePageState extends State<HomePage> {
   _openModalTransaction(BuildContext context) {
     showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (_) {
           return TransactionForm(_addTransaction);
         });
@@ -115,12 +116,15 @@ class _HomePageState extends State<HomePage> {
     final appBar = AppBar(
       title: Text('Despesas pessoais'),
       actions: [
-        if(isLandscape) IconButton(
-          onPressed: () {setState(() {
-            _showChart = !_showChart;
-          });},
-          icon: Icon(_showChart ? Icons.list : Icons.show_chart),
-        ),
+        if (isLandscape)
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _showChart = !_showChart;
+              });
+            },
+            icon: Icon(_showChart ? Icons.list : Icons.show_chart),
+          ),
         IconButton(
             onPressed: () => _openModalTransaction(context),
             icon: Icon(Icons.add))
@@ -154,16 +158,18 @@ class _HomePageState extends State<HomePage> {
               //       ),
               //     ],
               //   ),
-SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               if (_showChart || !isLandscape)
                 Container(
-                  height: availableHeight * (isLandscape ? 0.65 : 0.3),
+                  height: availableHeight * (isLandscape ? 0.7 : 0.3),
                   child: Chart(_recentTransactions),
                 ),
 
               if (!_showChart || !isLandscape)
                 Container(
-                  height: availableHeight * 0.7,
+                  height: availableHeight * (isLandscape ? 1 : 0.7),
                   child: TransactionList(_transactions, _removeTransaction),
                 ),
             ],
